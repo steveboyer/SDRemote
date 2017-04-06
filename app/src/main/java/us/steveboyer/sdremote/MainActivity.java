@@ -40,7 +40,8 @@ public class MainActivity extends Activity
     private final static int THREE = 3;
 
     private final static int BUTTON_ZERO = 0;
-    private final static int BUTTON_ONE = 1;
+    private final static int BUTTON_NULL = 1;
+    private final static int BUTTON_ONE = 17;
     private final static int BUTTON_TWO = 2;
     private final static int BUTTON_THREE = 3;
     private final static int BUTTON_FOUR = 4;
@@ -56,7 +57,7 @@ public class MainActivity extends Activity
     private final static int BUTTON_POWER = 14;
     private final static int BUTTON_SOURCE = 15;
     private final static int BUTTON_MUTE = 16;
-    private final static int NUM_BUTTONS = 17;
+    private final static int NUM_BUTTONS = 18;
         
     private SharedPreferences mainPreferences;
     private SharedPreferences.Editor prefsEditor;

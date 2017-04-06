@@ -10,7 +10,6 @@ import org.json.JSONObject;
  * Created by steve on 4/15/15.
  */
 public class mGPIO {
-    private Thread t;
     public static class mConnection {
         public String host;
         public int port;
@@ -33,10 +32,10 @@ public class mGPIO {
     }
 
     private mConnection conn;
+    private boolean connected;
 
     public mGPIO(mConnection conn){
         this.conn = conn;
-
     }
 
     /**
@@ -52,26 +51,12 @@ public class mGPIO {
      * @param macro Name of macro
      */
     public void sendMacro(final String macro) {
-        Runnable r = new mRunnable();
-
-        t = new Thread(r);
-        t.start();
-    }
-
-    public class mRunnable implements Runnable{
-        private boolean running = false;
-
-        public void terminate() {
-            running = false;
-        }
-
-        @Override
-        public void run() {
-            while (running) {
+        final mGPIO self = this;
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
                 try {
-                    Thread.sleep((long) 15000);
-
-                    SONParser parser = new JSONParser(conn.username,
+                    JSONParser parser = new JSONParser(conn.username,
                             conn.password, conn.host);
                     String url = "http://"
                             + conn.host + ":" + conn.port +
@@ -81,26 +66,13 @@ public class mGPIO {
 
                     if (obj != null) {
                     }
-
-
-                } catch (InterruptedException e) {
-                    running = false;
                 } catch (JSONException e) {
 
                 } catch (Exception e) {
 
                 }
-
-
-                }
-
             }
-
-        public void
-        }
+        });
+        t.start();
     }
-
-
 }
-
-
